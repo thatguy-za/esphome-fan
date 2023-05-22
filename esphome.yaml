@@ -1,0 +1,43 @@
+esphome:
+  name: fan
+  friendly_name: fan
+
+esp8266:
+  board: d1_mini
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: <your_key_here>
+
+ota:
+  password: <your_pass_here>
+
+wifi:
+  ssid: <your_ssid_here>
+  password: <your_pass_here>
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Fan Hotspot"
+    password: <your_pass_here>
+
+web_server:
+  port: 80   
+
+captive_portal:
+    
+output:
+  - platform: esp8266_pwm
+    pin: D2
+    frequency: 25000 Hz
+    id: fan_pwm
+
+fan:
+  - platform: speed
+    output: fan_pwm
+    name: "Fan Speed"
+    speed_count: 100
